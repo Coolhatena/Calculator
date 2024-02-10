@@ -1,4 +1,6 @@
+import CalculadoraParser from '@/grammar/CalculadoraParser.js';
 import CalculadoraVisitor from "../grammar/CalculadoraVisitor.js";
+
 
 // This class defines a complete generic visitor for a parse tree produced by CalculadoraParser.
 
@@ -34,7 +36,7 @@ export default class CustomVisitor extends CalculadoraVisitor {
 	// Visit a parse tree produced by CalculadoraParser#timesDiv.
 	visitTimesDiv(ctx) {
 		const operation_data = this.visitChildren(ctx);
-		return ctx.operation.type == ctx.TIMES().symbol.type
+		return ctx.operation.type == CalculadoraParser.TIMES
 			? operation_data[0] * operation_data[2]
 			: operation_data[0] / operation_data[2];
 	}
@@ -42,7 +44,7 @@ export default class CustomVisitor extends CalculadoraVisitor {
 	// Visit a parse tree produced by CalculadoraParser#plusSubtraction.
 	visitPlusSubtraction(ctx) {
 		const operation_data = this.visitChildren(ctx);
-		return ctx.operation.type == ctx.PLUS().symbol.type
+		return ctx.operation.type == CalculadoraParser.PLUS
 			? operation_data[0] + operation_data[2]
 			: operation_data[0] - operation_data[2];
 	}
